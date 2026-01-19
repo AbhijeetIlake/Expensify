@@ -1,13 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./styles.css"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expensify</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Expensify</h1>
+      <p>Track your expenses easily</p>
+    </header>
+
+    <div class="main-container">
+      <form id="expense-form">
+        <div class="input-container">
+          <label for="amount">Amount</label>
+          <input type="number" id="amount" name="amount" required />
+        </div>
+
+        <div class="input-container">
+          <label for="category">Category</label>
+          <select id="category" required>
+            <option value="">Select category</option>
+            <option value="food">Food</option>
+            <option value="clothes">Clothes</option>
+            <option value="bills">Bills</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="input-container">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            rows="3"
+            placeholder="e.g. Paid 1000 for electrical bill"
+            required
+          ></textarea>
+        </div>
+
+        <div class="input-container">
+          <label for="date">Date</label>
+          <input id="date" type="date" required />
+        </div>
+
+        <button id="submit-btn" type="submit">Add Expense</button>
+      </form>
+    </div>
+
+    <footer>
+      <p>© 2026 Expensify</p>
+    </footer>
+
     <script src="./script.js"></script>
-</head>
-<body>
-    <h1>Expensify</h1>
-</body>
+  </body>
 </html>
