@@ -9,7 +9,11 @@ body {
   color: #ffffff;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
 header {
+  background-color: #2a2a2a;
   text-align: center;
   padding: 20px 10px;
 }
@@ -24,11 +28,23 @@ header p {
   color: #b3b3b3;
   font-size: 0.9rem;
 }
-
-.main-container {
+.form-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
   display: flex;
   justify-content: center;
-  padding: 20px;
+  align-items: center;
+  backdrop-filter: blur(2px);
+  background-color: rgba(0, 0, 0, 0.55);
+}
+
+.hidden {
+  display: none;
 }
 
 #expense-form {
@@ -40,6 +56,7 @@ header p {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
 }
 
 .input-container {
@@ -75,6 +92,21 @@ header p {
   color: #9a9a9a;
 }
 
+.btn {
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  width: 100px;
+}
+
+.form-btn {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
 #submit-btn {
   margin-top: 10px;
   padding: 10px;
@@ -92,8 +124,13 @@ header p {
 }
 
 footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
   text-align: center;
   padding: 15px 10px;
   font-size: 0.8rem;
+  background-color: #1a1a1a;
   color: #888;
 }
