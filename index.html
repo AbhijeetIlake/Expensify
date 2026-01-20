@@ -1,77 +1,223 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Expensify</title>
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Expensify</h1>
-      <p>Track your expenses easily</p>
-    </header>
-    <main>
-      <button id="add-btn" class="btn">Add</button>
-      <section>
-        <div class="card">
-          <h2>Spent</h2>
-          <!-- demo price -->
-          <p>Rs. 100</p>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expensify • Smart Expense Management</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body data-theme="dark">
+  <!-- Navigation Header -->
+  <header class="navbar">
+    <div class="container navbar-content">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
         </div>
-        <div class="card">
-          <h2>Balance</h2>
-          <p>Rs. 900</p>
+        <h1 class="brand-name">Expensify</h1>
+      </div>
+
+      <div class="navbar-controls">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="theme-icon sun-icon hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="container">
+
+      <!-- Budget Onboarding -->
+      <div id="empty-state" class="onboarding hidden">
+        <div class="onboarding-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
         </div>
+        <h2 class="onboarding-title">Welcome to Expensify</h2>
+        <p class="onboarding-subtitle">Set your monthly budget to start tracking expenses and managing your finances
+          effectively.</p>
+
+        <div class="onboarding-form">
+          <input type="number" id="budget-input" class="budget-input" placeholder="Enter monthly budget (e.g., 5000)" />
+          <button type="button" id="add-budget-btn" class="btn btn-primary btn-large">
+            <span>Set Budget</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Dashboard Summary -->
+      <div class="dashboard-grid stats-grid">
+        <div class="stat-card stat-budget">
+          <div class="stat-header">
+            <span class="stat-label">Monthly Budget</span>
+            <svg class="stat-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <p class="stat-value" id="budget-amount">₹0</p>
+        </div>
+
+        <div class="stat-card stat-spent">
+          <div class="stat-header">
+            <span class="stat-label">Total Spent</span>
+            <svg class="stat-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+              <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+          </div>
+          <p class="stat-value" id="spent-amount">₹0</p>
+        </div>
+
+        <div class="stat-card stat-balance">
+          <div class="stat-header">
+            <span class="stat-label">Remaining</span>
+            <svg class="stat-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+              <line x1="1" y1="10" x2="23" y2="10"></line>
+            </svg>
+          </div>
+          <p class="stat-value" id="balance-amount">₹0</p>
+        </div>
+      </div>
+
+      <!-- Transactions Section -->
+      <section class="transactions-section" id="expense-section">
+        <div class="section-header">
+          <div class="section-title-group">
+            <h2 class="section-title">Recent Transactions</h2>
+            <span class="transaction-count" id="transaction-count">0 transactions</span>
+          </div>
+          <button id="add-btn" class="btn btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Add Transaction</span>
+          </button>
+        </div>
+
+        <div id="empty-text" class="empty-state">
+          <div class="empty-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+          </div>
+          <p class="empty-message">No transactions yet</p>
+          <p class="empty-hint">Add your first expense to start tracking</p>
+        </div>
+
+        <ul id="expense-list" class="transaction-list"></ul>
       </section>
-      <section>
-        <!-- list -->
-      </section>
-    </main>
-    <div class="form-container hidden" id="form-container">
-      <form id="expense-form" aria-label="Add expense form">
-        <div class="input-container">
-          <label for="amount">Amount</label>
-          <input type="number" id="amount" name="amount" required autofocus />
+    </div>
+  </main>
+
+  <!-- Transaction Form Modal -->
+  <div class="modal-overlay" id="form-container">
+    <div class="modal-container">
+      <form id="expense-form" class="transaction-form">
+        <div class="form-header">
+          <h2 id="form-title" class="form-title">Add Transaction</h2>
+          <button type="button" id="close-btn" class="btn-close" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
         </div>
 
-        <div class="input-container">
-          <label for="category">Category</label>
-          <select id="category" required>
-            <option value="">Select category</option>
-            <option value="food">Food</option>
-            <option value="clothes">Clothes</option>
-            <option value="bills">Bills</option>
-            <option value="other">Other</option>
-          </select>
+        <div class="form-body">
+          <div class="form-group">
+            <label for="amount" class="form-label">Amount</label>
+            <div class="input-wrapper input-amount">
+              <span class="input-prefix">₹</span>
+              <input type="number" id="amount" class="form-input" name="amount" placeholder="0.00" step="0.01"
+                required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="category" class="form-label">Category</label>
+              <select id="category" class="form-input form-select" required>
+                <option value="">Select category</option>
+                <option value="food">🍔 Food & Dining</option>
+                <option value="clothes">👕 Shopping</option>
+                <option value="bills">📑 Utility Bills</option>
+                <option value="transport">🚗 Transport</option>
+                <option value="health">🏥 Medical</option>
+                <option value="other">✨ Others</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="date" class="form-label">Date</label>
+              <input id="date" type="date" class="form-input" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="description" class="form-label">Description (Optional)</label>
+            <textarea id="description" class="form-input form-textarea" rows="3"
+              placeholder="Add notes about this transaction..."></textarea>
+          </div>
         </div>
 
-        <div class="input-container">
-          <label for="description">Description</label>
-          <textarea
-            id="description"
-            rows="3"
-            placeholder="e.g. Paid 1000 for electrical bill"
-            required
-          ></textarea>
-        </div>
-
-        <div class="input-container">
-          <label for="date">Date</label>
-          <input id="date" type="date" required />
-        </div>
-
-        <div class="form-btn">
-          <button class="btn" id="submit-btn" type="submit">Add</button>
-          <button class="btn" id="close-btn" type="button">Close</button>
+        <div class="form-footer">
+          <button type="submit" id="submit-btn" class="btn btn-primary btn-block">
+            <span>Add Transaction</span>
+          </button>
         </div>
       </form>
     </div>
+  </div>
 
-    <footer>
-      <p>© 2026 Expensify</p>
-    </footer>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer-text">© 2026 <strong>Expensify</strong> • Smart Expense Management</p>
+    </div>
+  </footer>
 
-    <script src="./script.js"></script>
-  </body>
+  <script src="./script.js"></script>
+</body>
+
 </html>
